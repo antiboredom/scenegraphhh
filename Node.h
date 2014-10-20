@@ -53,6 +53,7 @@ public:
   std::map<std::string, NodeRef> mChildren;
   
   ci::mat4 mModelMatrix;
+  ci::mat4 mWorldMatrix;
   ci::vec3 mLookDirection;
   
   ci::vec3 mPosition;

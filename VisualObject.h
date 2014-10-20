@@ -18,9 +18,9 @@ public:
     return VisualObjectRef( new VisualObject() );
   }
   
-  void update()override{}
+  void update() override{}
   
-  void draw()override{
+  void draw() override{
     ci::gl::color(mColor.r, mColor.g, mColor.b);
     ci::gl::drawSolidCircle(ci::vec2(0, 0), 1, 50);
   }

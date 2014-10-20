@@ -29,6 +29,13 @@ public:
       component->update();
     }
     
+    if(mParent) {
+      mWorldMatrix = mModelMatrix * mParent->mWorldMatrix;
+    } else {
+      mWorldMatrix = mModelMatrix;
+    }
+
+    
     auto it = mChildren.begin();
     auto end = mChildren.end();
     
@@ -43,12 +50,21 @@ public:
     
     {
       ci::gl::ScopedModelMatrix push;
-      if(mParent)
-        ci::gl::multModelMatrix(mModelMatrix + mParent->mModelMatrix);
+      
+      if(mParent) {
+//        ci::gl::multModelMatrix(mModelMatrix * mParent->mModelMatrix);
+//        ci::gl::multModelMatrix(mWorldMatrix * mModelMatrix);
+        ci::gl::multModelMatrix(mWorldMatrix);
+//        ci::gl::multModelMatrix(mWorldMatrix * mParent->mWorldMatrix);
+//        ci::gl::multModelMatrix(mWorldMatrix * mModelMatrix);
+      } else {
+        ci::gl::multModelMatrix(mModelMatrix);
+      }
       
       for( auto& component : mComponents ){
         component->draw();
       }
+//      ci::gl::ScopedModelMatrix pop;
     }
     
     auto it = mChildren.begin();
